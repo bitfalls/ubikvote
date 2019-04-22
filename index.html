@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lisinski Burner Wallet</title>
+
+    <link rel="stylesheet" href="/css/bulma.css">
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                UBIK blockchain glasanje
+            </h1>
+            <p class="subtitle">
+                Glasanje je nepovratno! Svaka odluka je finalna!
+            </p>
+            <p><em>Razvoj prototipa: Bitfalls.com</em></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container osnove">
+            <p>Stanje računa <span id="thisAddress"></span>: <span id="stanje"></span> LEth.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <button type="submit" id="adminToggle" class="button admins">Sakrij / prikaži administracijske opcije</button>
+        </div>
+    </section>
+    
+
+    <section class="section">
+        <div class="container admins hideable">
+            <form id="addAdmin">
+                <div class="field">
+                    <div class="control">
+                            <label class="label" for="addressOfAdmin">Novi administrator:</label>
+                            <p>Postojeći administratori mogu dodati nove administratore. Administratori mogu kreirati, zaključavati i skrivati izbore.</p>
+                            <input class="input" type="text" name="addressOdAdmin" id="addressOfAdmin">
+                            <button class="button" id="addAdminButton" type="submit">Pošalji</button>
+                            <button class="button" id="checkAdminButton" type="submit">Provjeri je li admin</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="section">
+            <div class="container admins hideable">
+                <form id="addAdmin">
+                    <div class="field">
+                        <div class="control">
+                                <label class="label" for="pollNameInput">Novo glasanje:</label>
+                                <p>Prvo se inicijalizira glasanje imenom i kratkim opisom, pitanja se dodaju naknadno.</p>
+                                <input class="input" type="text" name="pollNameInput" id="pollNameInput" placeholder="glasanje-1">
+                                <input class="input" type="text" name="pollDescInput" id="pollDescInput" placeholder="Izbor najljepse boje">
+                                <button class="button" id="initPollButton" type="submit">Pošalji</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    
+
+    <script src="/js/jquery-3.4.0.min.js"></script>
+    <script src="/js/ethers-v4.min.js"></script>
+    <script src="/js/custom.js"></script>
+</body>
+
+</html>
