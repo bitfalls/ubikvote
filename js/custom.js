@@ -305,9 +305,15 @@ async function getPolls() {
 }
 
 async function renderPoll(currentPoll) {
-    
+
     console.log(currentPoll);
 }
+
+let rowTemplate = document.querySelector("template#optionTemplate");
+document.querySelector("#addRowLinks").addEventListener("click", function(e) {
+    var clone = document.importNode(rowTemplate.content, true);
+    document.querySelector(".opcije").appendChild(clone);
+});
 
 async function findOutIfAdmin(address) {
     let currentValue = await contract.isAdmin(address);
@@ -349,8 +355,12 @@ document.querySelector("#checkAdminButton").addEventListener("click", function(e
 });
 
 document.querySelector("#initPollButton").addEventListener("click", function(e) {
-    let pollName = document.querySelector("#pollNameInput").value;
     let pollDesc = document.querySelector("#pollDescInput").value;
+    if (pollDesc == "") {
+        return false;
+    }
+    let pollName = slugify(pollDesc);
+    console.log("Poll: " + pollName);
     createNewPoll(pollName, pollDesc);
 });
 
@@ -364,6 +374,23 @@ async function registerNewAdmin(address) {
 async function createNewPoll(pollName, pollDesc) {
     let tx = await contract.initPoll(pollName, pollDesc);
     console.log(tx.hash);
+    tx.wait().then(async function(result){
+        // Get options
+        console.log(result);
+        let options = document.querySelectorAll(".opcije input");
+        for (var i = 0; i < options.length; i++) {
+            let option = options[i].value;
+            if (option !== "") {
+               let opttx = await addOption(pollName, option)
+            }
+        }
+    });
+}
+
+async function addOption(pollName, option) {
+    let slug = slugify(option);
+    let tx = await contract.addOption(pollName, slug, option);
+    console.log("Option " + slug + " for poll " + pollName + " at TX hash ".tx.hash);
     await tx.wait();
 }
 
@@ -373,3 +400,7 @@ function getUrlParameter(name) {
     var results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
+
+function slugify(someString) {
+    return ethers.utils.id(someString).slice(0, 7);
+}

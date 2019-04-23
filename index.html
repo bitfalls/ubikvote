@@ -55,20 +55,29 @@
 
     <section class="section">
             <div class="container admins hideable">
-                <form id="addAdmin">
                     <div class="field">
                         <div class="control">
-                                <label class="label" for="pollNameInput">Novo glasanje:</label>
-                                <p>Prvo se inicijalizira glasanje imenom i kratkim opisom, pitanja se dodaju naknadno.</p>
-                                <input class="input" type="text" name="pollNameInput" id="pollNameInput" placeholder="glasanje-1">
+                                <h3 class="h3">Kreiraj novo glasanje. Glasači mogu odabrati najviše jednu od ponuđenih opcija.</h3>
+                                <label class="label" for="pollDescInput">Naziv izbora:</label>   
                                 <input class="input" type="text" name="pollDescInput" id="pollDescInput" placeholder="Izbor najljepse boje">
-                                <button class="button" id="initPollButton" type="submit">Pošalji</button>
+                        </div>
+                        <div class="control opcije">
+                                <label class="label">Opcije</label>
+                                <input class="input" type="text" placeholder="Izbor" maxlength="72">
+                                <input class="input" type="text" placeholder="Izbor" maxlength="72">  
+                        </div>
+                        <div class="control">
+                            <button class="button" id="initPollButton" type="submit">Pošalji</button>
+                            <a href="javascript:void(0)" class="button" id="addRowLinks">Dodaj red</a>
                         </div>
                     </div>
-                </form>
+
             </div>
         </section>
     
+        <template id="optionTemplate">
+                <input class="input" type="text" placeholder="Izbor" maxlength="72">
+        </template>
 
     <script src="/js/jquery-3.4.0.min.js"></script>
     <script src="/js/ethers-v4.min.js"></script>
