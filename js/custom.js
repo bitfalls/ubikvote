@@ -1,15 +1,57 @@
 let currentProvider = new ethers.providers.JsonRpcProvider('https://rpc-bitfalls1.lisinski.online', 385);
 
-let abi = [
+let abiRobocop = [
 	{
-		"constant": false,
+		"constant": true,
+		"inputs": [],
+		"name": "votesLegolas",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [
 			{
 				"name": "addr",
 				"type": "address"
 			}
 		],
-		"name": "addAdmin",
+		"name": "hasVoted",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "votesRobocop",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "voteLegolas",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -17,99 +59,8 @@ let abi = [
 	},
 	{
 		"constant": false,
-		"inputs": [
-			{
-				"name": "pollName",
-				"type": "string"
-			},
-			{
-				"name": "optionSlug",
-				"type": "string"
-			},
-			{
-				"name": "optionDescription",
-				"type": "string"
-			}
-		],
-		"name": "addOption",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "name",
-				"type": "string"
-			}
-		],
-		"name": "finalizePoll",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "name",
-				"type": "string"
-			}
-		],
-		"name": "hidePoll",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"name": "description",
-				"type": "string"
-			}
-		],
-		"name": "initPoll",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "name",
-				"type": "string"
-			}
-		],
-		"name": "startPoll",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "pollName",
-				"type": "string"
-			},
-			{
-				"name": "optionSlug",
-				"type": "string"
-			}
-		],
-		"name": "vote",
+		"inputs": [],
+		"name": "voteRobocop",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -120,82 +71,9 @@ let abi = [
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "name",
-				"type": "string"
-			}
-		],
-		"name": "getNumOptions",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "pollName",
-				"type": "string"
-			},
-			{
-				"name": "optionSlug",
-				"type": "string"
-			}
-		],
-		"name": "getNumVotes",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"name": "optionIndex",
-				"type": "uint256"
-			}
-		],
-		"name": "getOptionForPoll",
-		"outputs": [
-			{
-				"components": [
-					{
-						"name": "slug",
-						"type": "string"
-					},
-					{
-						"name": "description",
-						"type": "string"
-					}
-				],
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
+	}
+];
+let abiVote = [
 	{
 		"constant": true,
 		"inputs": [
@@ -204,7 +82,7 @@ let abi = [
 				"type": "address"
 			}
 		],
-		"name": "isAdmin",
+		"name": "hasVoted",
 		"outputs": [
 			{
 				"name": "",
@@ -213,12 +91,21 @@ let abi = [
 		],
 		"payable": false,
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "vote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "pollCount",
+		"name": "votes",
 		"outputs": [
 			{
 				"name": "",
@@ -230,37 +117,12 @@ let abi = [
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "polls",
-		"outputs": [
-			{
-				"name": "label",
-				"type": "string"
-			},
-			{
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"name": "visible",
-				"type": "bool"
-			},
-			{
-				"name": "finalized",
-				"type": "bool"
-			}
-		],
+		"inputs": [],
 		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	}
-]
+];
 
 let pk = getUrlParameter('pk');
 let wallet;
@@ -271,8 +133,11 @@ if (pk) {
     pk = wallet.privateKey;
 }
 wallet = wallet.connect(currentProvider);
-let contractAddress = "0xfa1e05d90ba6fa2a921279e07de753d618c83f51";
-let contract = new ethers.Contract(contractAddress, abi, wallet);
+let robocopContractAddress = "0xe1bc1ac1a766439f26a7203b1ca6d05959565ac4";
+let ubikContractAddress = "0x468da9bca5b7d9b2d1348236c945dc8dfe6527f0";
+
+let robocopContract = new ethers.Contract(robocopContractAddress, abiRobocop, wallet);
+let ubikContract = new ethers.Contract(ubikContractAddress, abiVote, wallet);
 
 async function getBalance() {
     currentProvider.getBalance(wallet.address).then((balance) => {
@@ -289,109 +154,63 @@ async function getBalance() {
 
 setInterval(function(){
     getBalance();
-    getPolls();
-}, 3000);
+    getVotes();
+}, 5000);
 
-async function getPolls() {
-    contract.pollCount().then(function(result){
-        if (result > 0) {
-            for (var i = 0; i < result; i++) {
-                contract.polls(i).then(function(currentPoll){
-                    renderPoll(currentPoll);
-                });
-            }
-        }
-    });
+async function getVotes() {
+	let robocopVotes = await robocopContract.votesRobocop();
+	let legolasVotes = await robocopContract.votesLegolas();
+	let ubikVotes = await ubikContract.votes();
+
+	robocopContract.hasVoted(wallet.address).then(function(result) {
+		console.log(result);
+		if (!result && localStorage.getItem("votedForrobocop") !== "true" && localStorage.getItem("votedForlegolas") !== "true") {
+			$(".robolas button").attr("disabled", false);
+		} else {
+			$(".robolas button").attr("disabled", "disabled");
+		}
+	});
+
+	ubikContract.hasVoted(wallet.address).then(function(result){
+		console.log(result);
+		if (!result && localStorage.getItem("votedForubik") !== "true") {
+			$(".ubik button").attr("disabled", false);
+		} else {
+			$(".ubik button").attr("disabled", "disabled");
+		}
+	});
+
+	document.getElementById("robocopButton").innerText = "Robocop " + robocopVotes;
+	document.getElementById("legolasButton").innerText = "Legolas " + legolasVotes;
+	document.getElementById("ubikButton").innerText = "Glasova ZA: " + ubikVotes;
 }
 
-async function renderPoll(currentPoll) {
+document.querySelector("#robocopButton").addEventListener("click", castVote);
+document.querySelector("#legolasButton").addEventListener("click", castVote);
+document.querySelector("#ubikButton").addEventListener("click", castVote);
 
-    console.log(currentPoll);
+function castVote(e) {
+	localStorage.setItem("votedFor"+e.currentTarget.dataset.choice, true);
+	voteFor(e.currentTarget.dataset.choice);
+	$(e.currentTarget).parent().find("button").attr("disabled", "disabled").text("Glasam...");
 }
 
-let rowTemplate = document.querySelector("template#optionTemplate");
-document.querySelector("#addRowLinks").addEventListener("click", function(e) {
-    var clone = document.importNode(rowTemplate.content, true);
-    document.querySelector(".opcije").appendChild(clone);
-});
-
-async function findOutIfAdmin(address) {
-    let currentValue = await contract.isAdmin(address);
-    console.log(currentValue);
-    if (currentValue) {
-        $(".admins").show();
-    }
-}
-findOutIfAdmin(wallet.address);
-
-document.querySelector("form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    return false;
-}, false);
-
-document.querySelector("#adminToggle").addEventListener("click", function() {
-    $(".admins.hideable").toggle();
-})
-
-document.querySelector("#addAdminButton").addEventListener("click", function(e) {
-    let newAdminAddress = document.querySelector("#addressOfAdmin").value;
-    registerNewAdmin(newAdminAddress);
-});
-
-document.querySelector("#checkAdminButton").addEventListener("click", function(e) {
-    let newAdminAddress = document.querySelector("#addressOfAdmin").value;
-    if (newAdminAddress === "") {
-        return false;
-    }
-    contract.isAdmin(newAdminAddress).then(function(result){
-        if (result) {
-            $(document.querySelector("#addressOfAdmin")).removeClass("is-danger");
-            $(document.querySelector("#addressOfAdmin")).addClass("is-success");
-        } else {
-            $(document.querySelector("#addressOfAdmin")).removeClass("is-success");
-            $(document.querySelector("#addressOfAdmin")).addClass("is-danger");
-        }
-    });
-});
-
-document.querySelector("#initPollButton").addEventListener("click", function(e) {
-    let pollDesc = document.querySelector("#pollDescInput").value;
-    if (pollDesc == "") {
-        return false;
-    }
-    let pollName = slugify(pollDesc);
-    console.log("Poll: " + pollName);
-    createNewPoll(pollName, pollDesc);
-});
-
-async function registerNewAdmin(address) {
-    let tx = await contract.addAdmin(address);
-    console.log(tx.hash);
-    await tx.wait();
-    document.querySelector("#checkAdminButton").click();
-}
-
-async function createNewPoll(pollName, pollDesc) {
-    let tx = await contract.initPoll(pollName, pollDesc);
-    console.log(tx.hash);
-    tx.wait().then(async function(result){
-        // Get options
-        console.log(result);
-        let options = document.querySelectorAll(".opcije input");
-        for (var i = 0; i < options.length; i++) {
-            let option = options[i].value;
-            if (option !== "") {
-               let opttx = await addOption(pollName, option)
-            }
-        }
-    });
-}
-
-async function addOption(pollName, option) {
-    let slug = slugify(option);
-    let tx = await contract.addOption(pollName, slug, option);
-    console.log("Option " + slug + " for poll " + pollName + " at TX hash ".tx.hash);
-    await tx.wait();
+async function voteFor(string) {
+	let tx;
+	switch (string) {
+		case "robocop":
+			tx = robocopContract.voteRobocop();
+		break;
+		case "legolas":
+			tx = robocopContract.voteLegolas();
+		break;
+		case "ubik":
+			tx = ubikContract.vote();
+		break;
+		default:
+			//return false;
+	}
+	console.log(tx);
 }
 
 function getUrlParameter(name) {
