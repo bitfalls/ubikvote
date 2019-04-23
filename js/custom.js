@@ -2,18 +2,28 @@ let currentProvider = new ethers.providers.JsonRpcProvider('https://rpc-bitfalls
 
 let abiRobocop = [
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [],
-		"name": "votesLegolas",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"name": "voteLegolas",
+		"outputs": [],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "voteRobocop",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
 		"constant": true,
@@ -37,7 +47,7 @@ let abiRobocop = [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "votesRobocop",
+		"name": "votesLegolas",
 		"outputs": [
 			{
 				"name": "",
@@ -49,30 +59,21 @@ let abiRobocop = [
 		"type": "function"
 	},
 	{
-		"constant": false,
+		"constant": true,
 		"inputs": [],
-		"name": "voteLegolas",
-		"outputs": [],
+		"name": "votesRobocop",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"payable": false,
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "voteRobocop",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
 	}
 ];
+
 let abiVote = [
 	{
 		"constant": true,
@@ -133,8 +134,8 @@ if (pk) {
     pk = wallet.privateKey;
 }
 wallet = wallet.connect(currentProvider);
-let robocopContractAddress = "0xe1bc1ac1a766439f26a7203b1ca6d05959565ac4";
-let ubikContractAddress = "0x468da9bca5b7d9b2d1348236c945dc8dfe6527f0";
+let robocopContractAddress = "0x971d888b63b245bb8312bdc735de78c72b142db0";
+let ubikContractAddress = "0x3a62d161a5b4a7e8a1539a52d49903625b90eb64";
 
 let robocopContract = new ethers.Contract(robocopContractAddress, abiRobocop, wallet);
 let ubikContract = new ethers.Contract(ubikContractAddress, abiVote, wallet);
@@ -182,7 +183,7 @@ async function getVotes() {
 
 	document.getElementById("robocopButton").innerText = "Robocop " + robocopVotes;
 	document.getElementById("legolasButton").innerText = "Legolas " + legolasVotes;
-	document.getElementById("ubikButton").innerText = "Glasova ZA: " + ubikVotes;
+	document.getElementById("ubikButton").innerText = "Glasova ZA kandidacijsku listu broj 1: " + ubikVotes;
 }
 
 document.querySelector("#robocopButton").addEventListener("click", castVote);
