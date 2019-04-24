@@ -147,7 +147,7 @@ async function getBalance() {
 
         console.log("Address: " + wallet.address);
         console.log("Balance: " + etherString);
-        document.querySelector("#thisAddress").innerText = wallet.address;
+        document.querySelector("#thisAddress").innerHTML = "<a href='https://preglednik.lisinski.online/account/"+wallet.address+"' target='_blank'>"+wallet.address+"</a>";
         document.querySelector("#stanje").innerText = etherString;
         document.querySelector(".osnove").style = "display: block";
     });
